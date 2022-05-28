@@ -9,8 +9,26 @@ const app = new Koa();
 app.use(cors());
 app.use(koaBody({json: true}));
 
-let posts = [];
-let nextId = 1;
+let posts = [
+    {
+        id: "1",
+        content: "content1",
+        created: Date.now()
+    },
+
+    {
+        id: "2",
+        content: "content2",
+        created: Date.now()
+    },
+
+    {
+        id: "3",
+        content: "content3",
+        created: Date.now()
+    },
+];
+let nextId = 4;
 
 const router = new Router();
 
@@ -31,7 +49,7 @@ router.post('/posts', async (ctx, next) => {
 
     let found = posts.filter((item) => item.id === ctx.request.body.id);
     console.log(found)
-    if (found.length === 0){
+    if (found.length === 0) {
         posts.push(ctx.request.body.id, json);
 
         console.log("added: ")
