@@ -33,27 +33,20 @@ let nextId = 4;
 const router = new Router();
 
 router.get('/posts', async (ctx, next) => {
-    console.log("show: ")
-    console.log(posts)
     ctx.response.body = posts;
 });
 
 router.post('/posts', async (ctx, next) => {
-    console.log("POST")
-    console.log(posts)
-    let json = {
-        id: ctx.request.body.id,
-        content: ctx.request.body.content,
-        created: Date.now()
-    };
-
     let found = posts.filter((item) => item.id === ctx.request.body.id);
     console.log(found)
     if (found.length === 0) {
-        posts.push(ctx.request.body.id, json);
+        let json = {
+            id: ctx.request.body.id,
+            content: ctx.request.body.content,
+            created: Date.now()
+        };
 
-        console.log("added: ")
-        console.log(posts)
+        posts.push(json);
     } else {
 
     }
