@@ -15,23 +15,36 @@ let nextId = 1;
 const router = new Router();
 
 router.get('/posts', async (ctx, next) => {
+    console.log("show: ")
+    console.log(posts)
     ctx.response.body = posts;
 });
 
-router.post('/posts', async(ctx, next) => {
-    const {id, content} = ctx.request.body;
+router.post('/posts', async (ctx, next) => {
+    console.log("POST")
+    console.log(posts)
+    let json = {
+        id: ctx.request.body.id,
+        content: ctx.request.body.content,
+        created: Date.now()
+    };
 
-    if (id !== 0) {
-        posts = posts.map(o => o.id !== id ? o : {...o, content: content});
-        ctx.response.status = 204;
-        return;
+    let found = posts.filter((item) => item.id === ctx.request.body.id);
+    console.log(found)
+    if (found.length === 0){
+        posts.push(ctx.request.body.id, json);
+
+        console.log("added: ")
+        console.log(posts)
+    } else {
+
     }
 
-    posts.push({...ctx.request.body, id: nextId++, created: Date.now()});
-    ctx.response.status = 204;
+    ctx.response.body = posts;
+
 });
 
-router.delete('/posts/:id', async(ctx, next) => {
+router.delete('/posts/:id', async (ctx, next) => {
     const postId = Number(ctx.params.id);
     const index = posts.findIndex(o => o.id === postId);
     if (index !== -1) {
