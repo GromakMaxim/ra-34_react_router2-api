@@ -11,19 +11,19 @@ app.use(koaBody({json: true}));
 
 let posts = [
     {
-        id: "1",
+        id: "633d9312-816c-4bdf-a2fc-8e4127785253",
         content: "content1",
         created: Date.now()
     },
 
     {
-        id: "2",
+        id: "633d9312-816c-4bdf-a2fc-8e4667785211",
         content: "content2",
         created: Date.now()
     },
 
     {
-        id: "3",
+        id: "633d9312-816c-4bdf-a2fc-8e4667785255",
         content: "content3",
         created: Date.now()
     },
