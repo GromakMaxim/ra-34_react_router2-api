@@ -37,20 +37,15 @@ router.get('/posts', async (ctx, next) => {
 });
 
 router.post('/posts', async (ctx, next) => {
-    let found = posts.filter((item) => item.id === ctx.request.body.id);
-    console.log(found)
-    if (found.length === 0) {
-        let json = {
-            id: ctx.request.body.id,
-            content: ctx.request.body.content,
-            created: Date.now()
-        };
+    let found = posts.filter((item) => item.id !== ctx.request.body.id);
+    let json = {
+        id: ctx.request.body.id,
+        content: ctx.request.body.content,
+        created: Date.now()
+    };
 
-        posts.push(json);
-    } else {
-
-    }
-
+    found.push(json);
+    posts = found;
     ctx.response.body = posts;
 
 });
