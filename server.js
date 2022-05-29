@@ -51,12 +51,8 @@ router.post('/posts', async (ctx, next) => {
 });
 
 router.delete('/posts/:id', async (ctx, next) => {
-    const postId = Number(ctx.params.id);
-    const index = posts.findIndex(o => o.id === postId);
-    if (index !== -1) {
-        posts.splice(index, 1);
-    }
-
+    let found = posts.filter((item)=> item.id !== ctx.params.id)
+    posts = found;
     ctx.response.body = posts;
 });
 
