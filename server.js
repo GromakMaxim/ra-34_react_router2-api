@@ -56,7 +56,8 @@ router.delete('/posts/:id', async (ctx, next) => {
     if (index !== -1) {
         posts.splice(index, 1);
     }
-    ctx.response.status = 204;
+
+    ctx.response.body = posts;
 });
 
 app.use(router.routes()).use(router.allowedMethods());
